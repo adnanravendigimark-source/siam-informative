@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-cream-50: 251 246 238; /* #FBF6EE page background */
+  --color-cream-100: 245 236 221; /* #F5ECDD section/card background */
+  --color-ink: 36 28 22; /* #241C16 primary text */
+  --color-ink-light: 92 81 72; /* #5C5148 secondary text */
+  --color-coral: 225 89 44; /* #E1592C brand/CTA */
+  --color-coral-dark: 184 67 29; /* #B8431D hover/active */
+  --color-coral-light: 246 217 201; /* #F6D9C9 soft tint backgrounds */
+  --color-indigo: 30 42 74; /* #1E2A4A dark sections, header, footer */
+  --color-indigo-light: 51 69 111; /* #33456F */
+  --color-sand: 217 164 65; /* #D9A441 accent, stat highlights */
+  --color-sand-dark: 176 129 42; /* #B0812A */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #fbf6ee;
+  color: #241c16;
+}
+
+::selection {
+  background-color: rgb(var(--color-coral) / 0.22);
+  color: rgb(var(--color-ink));
+}
+
+/* Rich/long-form article content (Inside, Getting There, Traveler Info,
+   Facts pages) — consistent editorial typography for prose blocks. */
+.prose-article h2 {
+  font-family: theme("fontFamily.display");
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgb(var(--color-indigo));
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  scroll-margin-top: 6rem;
+}
+
+.prose-article h3 {
+  font-family: theme("fontFamily.display");
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: rgb(var(--color-ink));
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose-article p {
+  color: rgb(var(--color-ink-light));
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+
+.prose-article ul,
+.prose-article ol {
+  color: rgb(var(--color-ink-light));
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+  padding-left: 1.25rem;
+}
+
+.prose-article ul {
+  list-style-type: disc;
+}
+
+.prose-article ol {
+  list-style-type: decimal;
+}
+
+.prose-article li {
+  margin-bottom: 0.4rem;
+}
+
+.prose-article li::marker {
+  color: rgb(var(--color-coral));
+}
+
+.prose-article strong {
+  color: rgb(var(--color-ink));
+  font-weight: 700;
+}
+
+.prose-article a {
+  color: rgb(var(--color-coral-dark));
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
