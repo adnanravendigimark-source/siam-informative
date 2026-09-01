@@ -95,7 +95,7 @@ export default function ThingsToDoNearbyPage() {
               <div key={item.title} className="rounded-lg border border-guide-200 bg-white p-5 shadow-card">
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <h3 className="text-base font-bold text-navy">{item.title}</h3>
-                  <span className="rounded bg-sky-50 px-2 py-0.5 text-[11px] font-semibold text-sky-800 border border-sky-200">
+                  <span className="rounded bg-guide-100 px-2 py-0.5 text-[11px] font-semibold text-guide-700 border border-guide-200">
                     {item.distance}
                   </span>
                 </div>

@@ -255,7 +255,7 @@ export default function HomePage() {
                 <div key={ride.id} className="flex flex-col justify-between rounded-lg border border-guide-200 bg-white p-4 shadow-card">
                   <div>
                     <div className="flex items-center justify-between">
-                      <span className="rounded bg-rose-50 px-2 py-0.5 text-[10px] font-bold uppercase text-rose-700 border border-rose-200">
+                      <span className="rounded bg-guide-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-guide-700 border border-guide-200">
                         {ride.intensity} Thrill
                       </span>
                       <span className="text-[11px] font-semibold text-guide-600">Min: {ride.minHeight}</span>
@@ -279,7 +279,7 @@ export default function HomePage() {
                 <div key={ride.id} className="flex flex-col justify-between rounded-lg border border-guide-200 bg-white p-4 shadow-card">
                   <div>
                     <div className="flex items-center justify-between">
-                      <span className="rounded bg-sky-50 px-2 py-0.5 text-[10px] font-bold uppercase text-sky-700 border border-sky-200">
+                      <span className="rounded bg-guide-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-guide-700 border border-guide-200">
                         {ride.category}
                       </span>
                       <span className="text-[11px] font-semibold text-guide-600">{ride.minHeight}</span>

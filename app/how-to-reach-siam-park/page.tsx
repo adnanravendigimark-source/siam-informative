@@ -67,7 +67,7 @@ export default function HowToReachPage() {
                 <div key={stop.location} className="p-4 hover:bg-guide-50/50">
                   <div className="flex flex-wrap items-baseline justify-between gap-2">
                     <span className="font-bold text-xs sm:text-sm text-navy">{stop.location}</span>
-                    <span className="rounded bg-sky-50 px-2 py-0.5 text-[10px] font-semibold uppercase text-sky-800 border border-sky-200">
+                    <span className="rounded bg-guide-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-guide-700 border border-guide-200">
                       {stop.area}
                     </span>
                   </div>
