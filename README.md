@@ -101,3 +101,4 @@ honestly describe what's actually shown — most are stock photos of
 other water parks, beaches, and landmarks used for atmosphere, not
 photos of Siam Park itself. See `lib/images.ts` for the full manifest
 with photographer credit and source notes.
+# siam-informative
