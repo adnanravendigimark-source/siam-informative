@@ -6,7 +6,7 @@ export const SITE_URL = "https://www.siam-informative.com";
 export const SITE_TAGLINE = "Tickets, Prices & Visitor Guide";
 export const SITE_DESCRIPTION =
   "An independent, unofficial visitor's guide to Siam Park in Costa Adeje, Tenerife — ticket prices, opening hours, what's inside the park, getting there, and everything else you need to plan your visit.";
-export const CONTACT_EMAIL = "hello@siam-informative.com";
+export const CONTACT_EMAIL = "jrandrewclark@gmaill.com";
 
 // This site does not sell tickets itself — it's an independent
 // information resource. Where visitors are ready to actually book, we
