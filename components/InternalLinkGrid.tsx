@@ -15,6 +15,12 @@ export const ALL_GUIDE_LINKS: LinkCard[] = [
     icon: "🌊",
   },
   {
+    href: "/about-siam-park/",
+    title: "About Siam Park",
+    description: "The story behind the park's Thai-inspired design, its owners, and how it was built.",
+    icon: "🏛️",
+  },
+  {
     href: "/how-to-reach-siam-park/",
     title: "Getting There",
     description: "Driving, bus routes, taxis, and organized transport options to reach the park.",
@@ -29,14 +35,20 @@ export const ALL_GUIDE_LINKS: LinkCard[] = [
   {
     href: "/interesting-facts-about-siam-park/",
     title: "Interesting Facts",
-    description: "The story behind the park's Thai-inspired design and its record-setting attractions.",
+    description: "Record-chasing attractions and a few marketing claims worth a closer look.",
     icon: "📌",
+  },
+  {
+    href: "/things-to-do-near-siam-park/",
+    title: "Things to Do Nearby",
+    description: "Make a full day of it — beaches, Siam Mall, and other Costa Adeje attractions.",
+    icon: "🗺️",
   },
 ];
 
 export default function InternalLinkGrid({
   exclude,
-  heading = "Explore the Guide",
+  heading = "Plan the Rest of Your Visit",
 }: {
   exclude?: string;
   heading?: string;

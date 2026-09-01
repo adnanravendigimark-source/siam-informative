@@ -3,17 +3,32 @@ import PageHero from "@/components/PageHero";
 import Container from "@/components/Container";
 import { IMAGES } from "@/lib/images";
 import { buildMetadata, breadcrumbJsonLd } from "@/lib/seo";
-import { CONTACT_EMAIL } from "@/lib/site";
+import { CONTACT_EMAIL, OFFICIAL_TICKETS_URL } from "@/lib/site";
 
 const PATH = "/contact/";
 const TITLE = "Contact Us";
-const DESCRIPTION = "Get in touch with corrections, questions, or feedback about this Siam Park visitor guide.";
+const DESCRIPTION = "Get in touch with corrections, questions, or feedback about this Siam Park visitor guide — plus quick answers to common questions before you book.";
 
 export const metadata: Metadata = buildMetadata({ title: TITLE, description: DESCRIPTION, path: PATH });
 
 const breadcrumbs = [
   { name: "Home", path: "/" },
   { name: "Contact", path: PATH },
+];
+
+const quickAnswers = [
+  {
+    q: "Do you sell Siam Park tickets?",
+    a: "No. This is an independent information guide, not a ticket seller. Use the link below to reach the park's official ticket page.",
+  },
+  {
+    q: "I have an existing booking — can you help?",
+    a: "Not directly, since bookings are handled by the park or your ticket provider, not by us. Contact them for anything related to an existing reservation.",
+  },
+  {
+    q: "I spotted an outdated price or fact.",
+    a: "Please tell us — email the page link below and what looks wrong, and we'll review and correct it.",
+  },
 ];
 
 export default function ContactPage() {
@@ -50,11 +65,27 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div className="mx-auto mt-6 max-w-lg rounded-2xl border border-ink/10 bg-cream-100 p-6 text-center text-sm text-ink-light">
-          Looking to book tickets or ask about an existing reservation?
-          This is an independent guide, not the park's official site or a
-          ticket seller — please contact Siam Park or your ticket provider
-          directly for booking support.
+        <div className="mx-auto mt-10 max-w-lg">
+          <p className="text-center text-xs font-bold uppercase tracking-wider text-coral">Common Questions</p>
+          <div className="mt-4 space-y-3">
+            {quickAnswers.map((item) => (
+              <div key={item.q} className="rounded-xl border border-ink/10 bg-white p-5 shadow-card">
+                <p className="font-display text-sm font-bold text-indigo">{item.q}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-ink-light">{item.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mx-auto mt-8 max-w-lg text-center">
+          <a
+            href={OFFICIAL_TICKETS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block rounded-lg bg-coral px-6 py-3 text-sm font-bold text-white shadow-md transition hover:bg-coral-dark"
+          >
+            Go to Official Ticket Page ↗
+          </a>
         </div>
       </Container>
 

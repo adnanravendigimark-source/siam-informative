@@ -21,16 +21,27 @@ in the page source.
 
 ## Pages
 
+This site has no "About Us" / editorial page — every page is about Siam
+Park itself, following the depth and hub-style structure of sites like
+vasamuseumtickets.com (a full ticket-pricing table, hours, and tips live
+directly on the homepage; every other page goes deeper on one topic).
+
 | Route | Purpose |
 |---|---|
-| `/` | Homepage — overview, stats, FAQ |
+| `/` | Homepage hub — ticket pricing table, ticket types explained, hours & location, visitor tips, FAQ, links to every other page |
 | `/inside-siam-park/` | Attractions, rides, and facilities |
+| `/about-siam-park/` | The park's history, Thai design story, and how it was built |
 | `/how-to-reach-siam-park/` | Transport: car, bus, taxi, organized transfers |
-| `/traveler-information/` | Location, hours, tickets, tips |
+| `/traveler-information/` | Location, hours, tickets, tips (deeper dive) |
 | `/interesting-facts-about-siam-park/` | Origin story, design, and a fact-check note on marketing claims |
-| `/about/` | Editorial policy, independence disclosure |
-| `/contact/` | Contact email |
+| `/things-to-do-near-siam-park/` | Siam Mall, nearby beaches, Aqualand, Loro Parque |
+| `/contact/` | Contact email + quick answers to common questions |
 | `/privacy-policy/` | Privacy policy |
+
+Every "Book" / "Check Prices" call-to-action links out to the park's own
+official ticket page (`siampark.net`) in a new tab — this site is an
+information resource, not a booking system, so purchases always happen
+on the operator's own site.
 
 ## Install & run locally
 

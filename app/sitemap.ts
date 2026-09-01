@@ -8,10 +8,11 @@ import { SITE_URL } from "@/lib/site";
 const ROUTES: { path: string; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"]; priority: number }[] = [
   { path: "/", changeFrequency: "monthly", priority: 1.0 },
   { path: "/inside-siam-park/", changeFrequency: "monthly", priority: 0.9 },
+  { path: "/about-siam-park/", changeFrequency: "monthly", priority: 0.8 },
   { path: "/how-to-reach-siam-park/", changeFrequency: "monthly", priority: 0.9 },
   { path: "/traveler-information/", changeFrequency: "monthly", priority: 0.9 },
   { path: "/interesting-facts-about-siam-park/", changeFrequency: "monthly", priority: 0.8 },
-  { path: "/about/", changeFrequency: "yearly", priority: 0.5 },
+  { path: "/things-to-do-near-siam-park/", changeFrequency: "monthly", priority: 0.7 },
   { path: "/contact/", changeFrequency: "yearly", priority: 0.4 },
   { path: "/privacy-policy/", changeFrequency: "yearly", priority: 0.2 },
 ];
