@@ -1,7 +1,3 @@
-// New, original mark for this project: a stylised wave crest inside a
-// rounded shield-ish outline, evoking a water park guide without reusing
-// any motif (temple roofline, pyramid, palace gate) from the other 12
-// sibling projects.
 export default function Logo({ className = "" }: { className?: string }) {
   return (
     <svg
@@ -11,22 +7,22 @@ export default function Logo({ className = "" }: { className?: string }) {
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
-      <circle cx="20" cy="20" r="19" fill="#1E2A4A" />
+      <rect width="40" height="40" rx="8" fill="#0f2b48" />
       <path
-        d="M6 23c2.5-3 5-3 7.5 0s5 3 7.5 0 5-3 7.5 0 5 3 7.5 0"
-        stroke="#D9A441"
-        strokeWidth="2.4"
+        d="M7 23C10.5 19 14.5 19 18 23C21.5 27 25.5 27 29 23C31 20.8 32.5 21.2 33 22"
+        stroke="#38bdf8"
+        strokeWidth="2.2"
         strokeLinecap="round"
-        fill="none"
+        strokeLinejoin="round"
       />
       <path
-        d="M6 17c2.5-3 5-3 7.5 0s5 3 7.5 0 5-3 7.5 0 5 3 7.5 0"
-        stroke="#E1592C"
-        strokeWidth="2.4"
+        d="M7 16.5C10.5 12.5 14.5 12.5 18 16.5C21.5 20.5 25.5 20.5 29 16.5C31 14.3 32.5 14.7 33 15.5"
+        stroke="#ffffff"
+        strokeWidth="2.2"
         strokeLinecap="round"
-        fill="none"
+        strokeLinejoin="round"
       />
-      <circle cx="20" cy="10.5" r="2.6" fill="#F6D9C9" />
+      <circle cx="28" cy="10" r="2.2" fill="#38bdf8" />
     </svg>
   );
 }

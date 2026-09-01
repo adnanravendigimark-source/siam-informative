@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Breadcrumbs from "./Breadcrumbs";
 import Container from "./Container";
 import type { SiteImage } from "@/lib/images";
@@ -7,46 +6,40 @@ export default function PageHero({
   eyebrow,
   title,
   description,
-  image,
   breadcrumbs,
   readTime,
 }: {
   eyebrow: string;
   title: string;
   description: string;
-  image: SiteImage;
+  image?: SiteImage;
   breadcrumbs: { name: string; path: string }[];
   readTime?: string;
 }) {
   return (
-    <section className="relative overflow-hidden bg-indigo">
-      <div className="absolute inset-0">
-        <Image
-          src={image.src}
-          alt={image.alt}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover opacity-40"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-indigo via-indigo/80 to-indigo/40" />
-      </div>
-      <Container className="relative py-14 sm:py-20">
-        <div className="mb-5 rounded-md bg-white/10 px-3 py-1.5 backdrop-blur-sm inline-block">
-          <Breadcrumbs items={breadcrumbs} />
-        </div>
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-sand">{eyebrow}</p>
-        <h1 className="mt-3 max-w-2xl font-display text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
-          {title}
-        </h1>
-        <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-cream-50/85 sm:text-base">
-          {description}
-        </p>
-        {readTime && (
-          <p className="mt-5 text-xs font-semibold uppercase tracking-wider text-cream-50/60">
-            {readTime}
+    <section className="border-b border-guide-200 bg-white py-10 sm:py-14">
+      <Container>
+        <div className="max-w-3xl">
+          <div className="mb-4">
+            <Breadcrumbs items={breadcrumbs} />
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="inline-flex items-center rounded bg-guide-100 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-guide-700">
+              {eyebrow}
+            </span>
+            {readTime && (
+              <span className="text-xs text-guide-500">
+                · {readTime}
+              </span>
+            )}
+          </div>
+          <h1 className="mt-3 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
+            {title}
+          </h1>
+          <p className="mt-3.5 text-base leading-relaxed text-guide-600 sm:text-lg">
+            {description}
           </p>
-        )}
+        </div>
       </Container>
     </section>
   );

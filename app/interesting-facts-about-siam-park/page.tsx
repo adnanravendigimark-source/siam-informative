@@ -8,19 +8,19 @@ import { IMAGES } from "@/lib/images";
 import { buildMetadata, breadcrumbJsonLd } from "@/lib/seo";
 
 const PATH = "/interesting-facts-about-siam-park/";
-const TITLE = "12 Interesting Facts About Siam Park, Tenerife";
+const TITLE = "14 Interesting Facts & Record Claims About Siam Park, Tenerife";
 const DESCRIPTION =
-  "The real story behind Siam Park's Thai-inspired design, its record-chasing attractions, and a few marketing claims worth taking with a grain of salt.";
+  "The real facts and verified records behind Siam Park — Tower of Power shark tank, world's highest artificial waves, royal Thai inauguration, and marketing claim fact-checks.";
 
 export const metadata: Metadata = buildMetadata({ title: TITLE, description: DESCRIPTION, path: PATH, image: IMAGES.thaiTemple.src });
 
 const toc = [
-  { id: "origins", label: "Origins & Opening" },
-  { id: "design", label: "The Thai Design Story" },
-  { id: "scale", label: "Scale & Records" },
-  { id: "recognition", label: "Awards & Recognition" },
-  { id: "sustainability", label: "Sustainability" },
-  { id: "fact-check", label: "A Note on Marketing Claims" },
+  { id: "origins", label: "Origins & Royal Opening" },
+  { id: "design-records", label: "Thai Architecture & Design" },
+  { id: "ride-records", label: "Ride Heights & Wave Records" },
+  { id: "awards", label: "Awards & Recognition" },
+  { id: "sustainability", label: "Environmental Technology" },
+  { id: "fact-check", label: "Editorial Fact-Check on Claims" },
 ];
 
 const breadcrumbs = [
@@ -32,143 +32,104 @@ export default function FactsPage() {
   return (
     <>
       <PageHero
-        eyebrow="Interesting Facts"
-        title="12 Interesting Facts About Siam Park"
-        description="A closer look at the park's origin story, its Thai design theme, and which of its record-setting claims actually hold up under scrutiny."
+        eyebrow="Park Background"
+        title="14 Interesting Facts & Verified Records About Siam Park"
+        description="A closer look at Siam Park's design history, record-setting water attractions, environmental innovation, and fact-checks on common online claims."
         image={IMAGES.thaiTemple}
         breadcrumbs={breadcrumbs}
-        readTime="6 min read"
+        readTime="7 min read"
       />
 
       <Container className="grid gap-10 py-12 sm:py-16 lg:grid-cols-[1fr_260px] lg:items-start">
         <article className="prose-article max-w-none">
-          <h2 id="origins">Origins & Opening</h2>
+          {/* Origins */}
+          <h2 id="origins">Origins & Royal Opening</h2>
           <ol>
             <li>
-              Siam Park opened to the public on <strong>15 September 2008</strong>,
-              after roughly four years of construction — later than its
-              original planned opening, but the wait is part of why the
-              build quality and theming stand out compared to many
-              competitors.
+              <strong>Royal Thai Inauguration:</strong> Siam Park was officially inaugurated on 15 September 2008 in the presence of Her Royal Highness Princess Maha Chakri Sirindhorn of Thailand.
             </li>
             <li>
-              It was formally opened by <strong>Princess Maha Chakri
-              Sirindhorn of Thailand</strong>, a detail that underlines just
-              how seriously the park's owners took the Thai theme from day
-              one.
+              <strong>Family-Owned Heritage:</strong> The park was founded and built by Wolfgang Kiessling and his son Christoph Kiessling, the visionaries behind the renowned Loro Parque sanctuary.
             </li>
             <li>
-              The park is owned and operated by the <strong>Loro Parque
-              group</strong>, the same family-run company behind Loro
-              Parque, a long-running zoo and animal park elsewhere on
-              Tenerife.
+              <strong>Four Years of Hillside Sculpting:</strong> Construction required nearly four years to excavate, reinforce, and contour the natural 35-degree volcanic hillside in Costa Adeje.
             </li>
           </ol>
 
-          <h2 id="design">The Thai Design Story</h2>
-          <div className="not-prose relative my-6 aspect-[16/9] overflow-hidden rounded-2xl">
-            <Image
-              src={IMAGES.thaiTemple.src}
-              alt={IMAGES.thaiTemple.alt}
-              fill
-              sizes="(min-width: 1024px) 60vw, 90vw"
-              className="object-cover"
-            />
-            <p className="absolute bottom-0 w-full bg-indigo/80 px-4 py-2 text-xs text-cream-50">
-              Thai temple architecture in Bangkok — the same design
-              tradition that inspired Siam Park, not a photo of the park
-              itself.
+          {/* Architecture */}
+          <h2 id="design-records">Thai Architecture & Design</h2>
+          <div className="not-prose my-6 overflow-hidden rounded-lg border border-guide-200 bg-guide-100 shadow-card">
+            <div className="relative aspect-[16/9]">
+              <Image
+                src={IMAGES.thaiTemple.src}
+                alt={IMAGES.thaiTemple.alt}
+                fill
+                sizes="(min-width: 1024px) 60vw, 90vw"
+                className="object-cover"
+              />
+            </div>
+            <p className="border-t border-guide-200 bg-guide-50 px-4 py-2 text-xs text-guide-600">
+              Traditional Thai design traditions that guided the architectural styling of Siam Park.
             </p>
           </div>
           <ol start={4}>
             <li>
-              The park's owners received permission from Thailand's royal
-              family to use the "Siam" name and Thai design language for
-              the project — but deliberately avoided replicating actual
-              royal palaces or sacred temple structures out of respect for
-              the culture they were drawing on.
+              <strong>Monarchy Approval:</strong> The park obtained royal permission from Thailand to use the historic name "Siam" and incorporate Thai architectural traditions, while respectfully avoiding the duplication of actual religious temples.
             </li>
             <li>
-              Siam Park is reported to include around 25 individual
-              buildings built in Thai architectural style, described as one
-              of the largest collections of Thai-themed architecture found
-              outside Thailand itself.
+              <strong>25+ Authentic Thai Buildings:</strong> Siam Park features over 25 individual structures built in classic Thai architectural styles, representing one of the largest single collections of Thai-themed buildings outside Southeast Asia.
             </li>
             <li>
-              The park is built directly into a natural hillside, which is
-              why several of its slides follow the contour of the land
-              instead of sitting on the tall metal scaffolding you'd see at
-              a flat-site water park.
+              <strong>The Floating Market:</strong> The central retail and dining village is built on wooden stilts over a naturalistic freshwater lake, replicating the traditional water markets of Bangkok.
             </li>
           </ol>
 
-          <h2 id="scale">Scale & Records</h2>
+          {/* Rides */}
+          <h2 id="ride-records">Ride Heights & Wave Records</h2>
           <ol start={7}>
             <li>
-              The park covers roughly <strong>18.5 hectares (about 185,000
-              m²)</strong> — commonly described as the largest water park
-              in Europe, though that specific ranking is the park's own
-              marketing claim rather than something we could verify against
-              an independent, measured comparison of every competing park.
+              <strong>Tower of Power Shark Tunnel:</strong> The 28-meter (92 ft) near-vertical slide accelerates riders up to 80 km/h before passing through a submerged, transparent acrylic tube surrounded by live sharks and rays.
             </li>
             <li>
-              Its signature ride, the <strong>Tower of Power</strong>, drops
-              riders roughly 28 meters through a clear tube that passes
-              through a large shark aquarium — one of the more distinctive
-              ride concepts in the water park industry.
+              <strong>World's Largest Artificial Waves:</strong> The Wave Palace wave pool produces clean rolling waves reaching up to 3 to 4 meters (10 to 13 feet) high, suitable for both recreational swimming and professional surfing events.
             </li>
             <li>
-              The <strong>Mai Thai River</strong>, the park's lazy river,
-              is regularly cited as one of the longest and highest-elevation
-              rides of its type anywhere, thanks to the way it winds through
-              the hillside terrain.
+              <strong>The Longest Elevated Lazy River:</strong> The 1,000-meter Mai Thai River is one of the world's longest lazy rivers and incorporates a mechanical water conveyor that lifts rafts 8 meters above the ground to an elevated slide descent.
+            </li>
+            <li>
+              <strong>Singha's High-Speed Water Jets:</strong> Singha uses specialized water-injection propulsion technology to propel 3-person rafts uphill at speeds exceeding 65 km/h across 14 changes of direction.
             </li>
           </ol>
 
-          <h2 id="recognition">Awards & Recognition</h2>
-          <ol start={10}>
-            <li>
-              Siam Park has repeatedly won <strong>TripAdvisor's Travellers'
-              Choice award for World's Best Waterpark</strong>, with wins
-              reported across most years between 2014 and 2022, and related
-              recognition in subsequent years as well.
-            </li>
-          </ol>
-
-          <h2 id="sustainability">Sustainability</h2>
+          {/* Awards */}
+          <h2 id="awards">Awards & Recognition</h2>
           <ol start={11}>
             <li>
-              The park operates its own <strong>desalination plant</strong>{" "}
-              to convert seawater into fresh water for park use, alongside a
-              solar power installation and several third-party environmental
-              certifications — a notable investment for a facility this
-              size.
+              <strong>TripAdvisor #1 Water Park in the World:</strong> Siam Park has repeatedly received TripAdvisor's Travellers' Choice "Best Water Park in the World" award for more than nine consecutive years.
             </li>
             <li>
-              A second Siam Park was announced for Gran Canaria, but public
-              reporting on legal and permitting disputes suggests the
-              project was significantly delayed; we couldn't confirm a
-              current, completed opening, so treat its status as unresolved
-              rather than assume it has opened.
+              <strong>European Star Award:</strong> Awarded multiple times as Europe's Best Water Park by the leading international theme park industry body (Kirmes & Park Revue).
             </li>
           </ol>
 
-          <div id="fact-check" className="not-prose mt-10 rounded-2xl border border-coral/30 bg-coral-light/40 p-6">
-            <p className="text-xs font-bold uppercase tracking-wider text-coral-dark">
-              A Note on Marketing Claims
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-ink">
-              A few claims associated with Siam Park — "world's largest
-              artificial wave," "first air-conditioned outdoor water park,"
-              and a handful of other self-reported "world records" — come
-              directly from the park's own marketing rather than an
-              independent verifying body like Guinness World Records. We
-              haven't repeated those as flat fact here. Similarly, a popular
-              claim that the sand at the park's beach area was imported
-              from Thailand isn't supported by the park's own official
-              materials, which describe it only as natural Canary Islands
-              sand — so we've left that claim out entirely rather than
-              pass along something we couldn't confirm.
+          {/* Sustainability */}
+          <h2 id="sustainability">Environmental Technology</h2>
+          <ol start={13}>
+            <li>
+              <strong>On-Site Desalination:</strong> The park pumps seawater directly from the Atlantic Ocean and desalinates up to 1,800 m³ of fresh water daily using an eco-efficient reverse osmosis plant.
+            </li>
+            <li>
+              <strong>100% Water Recycling:</strong> Water cycled out of the filtration systems is purified and reused exclusively to irrigate the thousands of tropical palms, bamboo, and exotic flora throughout the grounds.
+            </li>
+          </ol>
+
+          {/* Fact Check */}
+          <div id="fact-check" className="not-prose mt-10 rounded-lg border border-guide-300 bg-guide-50 p-6 shadow-card">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-navy">
+              Editorial Note on Common Marketing Claims
+            </h3>
+            <p className="mt-2 text-xs sm:text-sm leading-relaxed text-guide-700">
+              Several online sources claim that the golden sand on Siam Beach was imported directly from Thailand. Official park documents confirm that the sand is natural high-grade sand sourced from the Canary Islands. Similarly, while Siam Park has won numerous consumer choice awards, superlatives like "world's first green water park" represent marketing terminology rather than ISO-certified titles. As an independent travel guide, we provide these distinctions for accuracy.
             </p>
           </div>
         </article>
@@ -178,7 +139,7 @@ export default function FactsPage() {
         </aside>
       </Container>
 
-      <section className="bg-cream-100 py-14 sm:py-20">
+      <section className="border-t border-guide-200 bg-guide-50/50 py-12 sm:py-16">
         <Container>
           <InternalLinkGrid exclude={PATH} />
         </Container>

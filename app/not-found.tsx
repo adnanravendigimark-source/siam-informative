@@ -4,22 +4,23 @@ import InternalLinkGrid from "@/components/InternalLinkGrid";
 
 export default function NotFound() {
   return (
-    <Container className="py-20 text-center sm:py-28">
-      <p className="font-display text-7xl font-bold text-coral">404</p>
-      <h1 className="mt-4 font-display text-2xl font-bold text-indigo sm:text-3xl">
+    <Container className="py-16 text-center sm:py-24">
+      <p className="text-6xl font-extrabold text-guide-300">404</p>
+      <h1 className="mt-3 text-2xl font-bold text-navy sm:text-3xl">
         Page Not Found
       </h1>
-      <p className="mx-auto mt-3 max-w-md text-sm text-ink-light">
-        The page you're looking for doesn't exist or may have moved. Try
-        one of the guide's main sections below.
+      <p className="mx-auto mt-2 max-w-md text-xs sm:text-sm text-guide-600">
+        The requested guide page could not be located. You can return to the main guide or browse one of the chapters below.
       </p>
-      <Link
-        href="/"
-        className="mt-6 inline-block rounded-lg bg-coral px-6 py-3 text-sm font-bold text-white transition hover:bg-coral-dark"
-      >
-        Back to Home
-      </Link>
-      <div className="mx-auto mt-14 max-w-3xl text-left">
+      <div className="mt-6">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 rounded-md border border-guide-300 bg-white px-4 py-2 text-xs font-semibold text-navy hover:bg-guide-100 transition-colors shadow-subtle"
+        >
+          <span>← Back to Guide Home</span>
+        </Link>
+      </div>
+      <div className="mx-auto mt-12 max-w-3xl text-left border-t border-guide-200 pt-10">
         <InternalLinkGrid />
       </div>
     </Container>

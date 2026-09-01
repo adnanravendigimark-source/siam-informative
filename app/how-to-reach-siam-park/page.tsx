@@ -5,22 +5,24 @@ import Container from "@/components/Container";
 import TableOfContents from "@/components/TableOfContents";
 import InternalLinkGrid from "@/components/InternalLinkGrid";
 import { IMAGES } from "@/lib/images";
+import { FREE_SHUTTLE_STOPS, TITSA_BUS_ROUTES, PARKING_INFO } from "@/lib/shuttles";
 import { buildMetadata, breadcrumbJsonLd } from "@/lib/seo";
 
 const PATH = "/how-to-reach-siam-park/";
-const TITLE = "How to Get to Siam Park From Anywhere in Tenerife";
+const TITLE = "How to Reach Siam Park: Free Shuttles, Public Buses, Driving & Parking";
 const DESCRIPTION =
-  "Every way to reach Siam Park in Costa Adeje, Tenerife — driving directions, public bus routes, taxi fares, and organized transport options compared.";
+  "Complete transport guide to Siam Park Tenerife — free shuttle bus timetables and pickup points in Los Cristianos and Las Américas, TITSA bus routes, driving directions, and parking details.";
 
 export const metadata: Metadata = buildMetadata({ title: TITLE, description: DESCRIPTION, path: PATH, image: IMAGES.coastalRoad.src });
 
 const toc = [
-  { id: "by-car", label: "By Car" },
-  { id: "by-bus", label: "By Public Bus" },
-  { id: "by-taxi", label: "By Taxi" },
-  { id: "organized-transport", label: "Shuttles & Organized Transport" },
-  { id: "parking", label: "Parking" },
-  { id: "tips", label: "Getting There: Quick Tips" },
+  { id: "free-shuttle", label: "Free Siam Park Shuttle Bus" },
+  { id: "public-bus", label: "Public TITSA Buses" },
+  { id: "by-car", label: "Driving & Highway Exits" },
+  { id: "parking", label: "On-Site Parking & Rates" },
+  { id: "by-taxi", label: "Taxi Fares & Ranks" },
+  { id: "airport-transfers", label: "Airport Transfers (TFS & TFN)" },
+  { id: "tips", label: "Transit Advice" },
 ];
 
 const breadcrumbs = [
@@ -32,98 +34,137 @@ export default function HowToReachPage() {
   return (
     <>
       <PageHero
-        eyebrow="Getting There"
+        eyebrow="Transport & Directions"
         title="How to Reach Siam Park"
-        description="Siam Park sits in Costa Adeje on Tenerife's southern coast — here's how to get there whether you're driving, riding the bus, or arriving from another resort area."
+        description="Every way to travel to Siam Park in Costa Adeje — from the complimentary double-decker shuttle buses and public transit routes to driving directions, GPS coordinates, and parking."
         image={IMAGES.coastalRoad}
         breadcrumbs={breadcrumbs}
-        readTime="5 min read"
+        readTime="6 min read"
       />
 
       <Container className="grid gap-10 py-12 sm:py-16 lg:grid-cols-[1fr_260px] lg:items-start">
         <article className="prose-article max-w-none">
           <p>
-            Siam Park is located in Costa Adeje, in the southern resort belt
-            of Tenerife, close to Playa de las Américas and roughly a
-            20–25 minute drive from Tenerife South Airport (Reina Sofía) —
-            though actual travel time depends heavily on traffic and
-            exactly where you're starting from. All the main routes below
-            are realistic options depending on your budget and how much
-            flexibility you want.
+            Siam Park is located in the Costa Adeje municipality on Tenerife's south coast, directly adjacent to the TF-1 motorway and within 5 to 10 minutes of major tourist resorts in Playa de las Américas and Los Cristianos.
           </p>
 
-          <h2 id="by-car">By Car</h2>
-          <div className="not-prose relative my-6 aspect-[16/9] overflow-hidden rounded-2xl">
-            <Image
-              src={IMAGES.coastalRoad.src}
-              alt={IMAGES.coastalRoad.alt}
-              fill
-              sizes="(min-width: 1024px) 60vw, 90vw"
-              className="object-cover"
-            />
+          {/* Free Shuttle Bus */}
+          <h2 id="free-shuttle">Free Siam Park Shuttle Bus</h2>
+          <p>
+            Siam Park operates its own dedicated fleet of branded double-decker shuttle buses offering <strong>100% free transportation</strong> for all park visitors staying in Los Cristianos, Playa de las Américas, and Costa Adeje.
+          </p>
+          <ul>
+            <li><strong>Service Frequency:</strong> Operates daily approximately every 30 minutes between <strong>9:30 AM and 1:00 PM</strong>, with return shuttles departing the park from <strong>4:00 PM to 6:30 PM</strong> (depending on season).</li>
+            <li><strong>Booking:</strong> No ticket or advance reservation is required. Simply queue at the official pickup stop.</li>
+          </ul>
+
+          <div className="not-prose my-6 overflow-hidden rounded-lg border border-guide-200 bg-white shadow-card">
+            <div className="border-b border-guide-200 bg-guide-100/80 px-4 py-3 text-xs sm:text-sm font-semibold text-navy">
+              Official Free Shuttle Bus Pickup Points
+            </div>
+            <div className="divide-y divide-guide-100">
+              {FREE_SHUTTLE_STOPS.map((stop) => (
+                <div key={stop.location} className="p-4 hover:bg-guide-50/50">
+                  <div className="flex flex-wrap items-baseline justify-between gap-2">
+                    <span className="font-bold text-xs sm:text-sm text-navy">{stop.location}</span>
+                    <span className="rounded bg-sky-50 px-2 py-0.5 text-[10px] font-semibold uppercase text-sky-800 border border-sky-200">
+                      {stop.area}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-xs text-guide-600">{stop.notes}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Public TITSA Buses */}
+          <h2 id="public-bus">Public TITSA Bus Network</h2>
+          <p>
+            Tenerife's green public bus network (TITSA) offers modern, air-conditioned connections across the entire island. The nearest major hub is <strong>Estación de Guaguas de Costa Adeje</strong> (Costa Adeje Central Bus Station), located roughly 400 meters (a 5-minute walk) from Siam Park's entrance turnstiles.
+          </p>
+
+          <div className="not-prose my-6 overflow-hidden rounded-lg border border-guide-200 bg-white shadow-card">
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse text-left text-xs sm:text-sm">
+                <thead>
+                  <tr className="border-b border-guide-200 bg-guide-100/80 text-guide-800">
+                    <th className="px-4 py-3 font-semibold">Line</th>
+                    <th className="px-4 py-3 font-semibold">Origin / Route</th>
+                    <th className="px-4 py-3 font-semibold">Frequency</th>
+                    <th className="px-4 py-3 font-semibold">Notes</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-guide-100">
+                  {TITSA_BUS_ROUTES.map((bus) => (
+                    <tr key={bus.number} className="hover:bg-guide-50/50">
+                      <td className="px-4 py-3 font-bold text-navy whitespace-nowrap">{bus.number}</td>
+                      <td className="px-4 py-3 text-guide-700">{bus.origin}</td>
+                      <td className="px-4 py-3 text-guide-600 whitespace-nowrap">{bus.frequency}</td>
+                      <td className="px-4 py-3 text-xs text-guide-500">{bus.notes}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Driving Directions */}
+          <h2 id="by-car">Driving Directions & Highway Exits</h2>
+          <div className="not-prose my-6 overflow-hidden rounded-lg border border-guide-200 bg-guide-100 shadow-card">
+            <div className="relative aspect-[16/9]">
+              <Image
+                src={IMAGES.coastalRoad.src}
+                alt={IMAGES.coastalRoad.alt}
+                fill
+                sizes="(min-width: 1024px) 60vw, 90vw"
+                className="object-cover"
+              />
+            </div>
+            <p className="border-t border-guide-200 bg-guide-50 px-4 py-2 text-xs text-guide-600">
+              The TF-1 coastal motorway connects Santa Cruz and the South Airport directly to Costa Adeje.
+            </p>
           </div>
           <p>
-            Driving is usually the most convenient option if you already
-            have a rental car. The park is accessed from the TF-1 motorway,
-            which runs along Tenerife's southern coast — take the exit
-            signposted for Costa Adeje / San Eugenio and follow local
-            signage toward the park. If you're coming from Santa Cruz or
-            the north of the island, you'll be on the TF-1 for most of the
-            journey; from the airport, it's a short, direct hop down the
-            same motorway.
+            If you are driving a rental car, access is fast and direct via the <strong>Autopista del Sur (TF-1)</strong> motorway:
           </p>
-
-          <h2 id="by-bus">By Public Bus</h2>
-          <p>
-            TITSA, Tenerife's public bus network, connects most of the
-            island to the Costa Adeje area, though which specific route
-            works best depends on where you're staying. Routes into the
-            Costa Adeje / Estación Costa Adeje interchange typically
-            involve a short walk from the bus stop to the park entrance —
-            budget extra time for this versus a taxi or direct shuttle.
-            Because TITSA updates its route numbers and schedules from time
-            to time, check the current timetable on the official TITSA
-            website before you travel rather than relying on a route number
-            you've seen elsewhere online, including on this page.
-          </p>
-
-          <h2 id="by-taxi">By Taxi</h2>
-          <p>
-            Taxis are widely available across Tenerife's resort areas and
-            at the airport, and fares are metered rather than negotiated.
-            As a rough planning figure, a taxi from Tenerife South Airport
-            to Costa Adeje has commonly been quoted in the €45–€60 range,
-            but always confirm an estimate with the driver before you set
-            off, since fuel prices and exact pickup/drop-off points affect
-            the final fare.
-          </p>
-
-          <h2 id="organized-transport">Shuttles & Organized Transport</h2>
-          <p>
-            If you'd rather not deal with directions at all, many hotels
-            and tour operators in the south of Tenerife offer transfer
-            packages that bundle return transport with your admission
-            ticket — worth comparing against a taxi fare if you're staying
-            somewhere without an easy direct bus connection. Some visitors
-            also arrive as part of a wider day-tour package that includes
-            pickup from northern Tenerife resorts like Puerto de la Cruz,
-            which is a considerably longer journey than from the south.
-          </p>
-
-          <h2 id="parking">Parking</h2>
-          <p>
-            An on-site car park is available for a fee, and spaces can fill
-            up during busy periods in peak season — arriving earlier in the
-            day generally means an easier time finding a space, on top of
-            the usual benefit of shorter queues at the gate.
-          </p>
-
-          <h2 id="tips">Getting There: Quick Tips</h2>
           <ul>
-            <li>Budget extra time in peak season — both roads and queues get busier from roughly May through October.</li>
-            <li>If you're staying in the south of Tenerife (Costa Adeje, Los Cristianos, Playa de las Américas), you're generally closest and have the most transport options.</li>
-            <li>Coming from the north of the island adds significant travel time — factor that into your day plan.</li>
-            <li>Whatever route you choose, arriving close to opening time tends to mean a smoother start to the day — see our <a href="/traveler-information/">Traveler Information</a> page for current opening hours.</li>
+            <li><strong>Arriving from the South / Airport (TFS) / Los Cristianos:</strong> Take <strong>Exit 73 (San Eugenio / Siam)</strong> and follow the roundabouts towards Siam Park / Siam Mall.</li>
+            <li><strong>Arriving from the North / Santa Cruz / Puerto de la Cruz:</strong> Take <strong>Exit 74 (San Eugenio)</strong> and merge onto the service road leading directly to the park entry gates.</li>
+            <li><strong>GPS Coordinates:</strong> 28.0718° N, 16.7262° W (Address: <em>Avenida Siam, s/n, 38660 Costa Adeje</em>).</li>
+          </ul>
+
+          {/* Parking */}
+          <h2 id="parking">On-Site Parking & Facilities</h2>
+          <ul>
+            <li><strong>Daily Parking Fee:</strong> {PARKING_INFO.fee}.</li>
+            <li><strong>Capacity:</strong> {PARKING_INFO.capacity}.</li>
+            <li><strong>Accessible Bays:</strong> {PARKING_INFO.disabledParking}.</li>
+            <li><strong>Hours of Operation:</strong> {PARKING_INFO.operatingHours}.</li>
+          </ul>
+
+          {/* Taxis */}
+          <h2 id="by-taxi">Taxi Fares & Taxi Ranks</h2>
+          <p>
+            Official white metered taxis in Tenerife are regulated by local municipal tariffs. Taxi ranks are located right outside the Siam Park entrance archway and operate continuously.
+          </p>
+          <ul>
+            <li>From <strong>Playa de las Américas / Los Cristianos:</strong> €8.00 – €12.00 (5–10 mins).</li>
+            <li>From <strong>Playa del Duque / La Caleta:</strong> €10.00 – €15.00 (10 mins).</li>
+            <li>From <strong>Los Gigantes / Puerto de Santiago:</strong> €35.00 – €45.00 (25 mins).</li>
+          </ul>
+
+          {/* Airport Transfers */}
+          <h2 id="airport-transfers">Airport Transfers</h2>
+          <ul>
+            <li><strong>Tenerife South Airport (Reina Sofía - TFS):</strong> 18 km away (~15–20 minutes drive). Direct via TF-1 Highway. Public bus line 111/711 or taxi (~€40–€50).</li>
+            <li><strong>Tenerife North Airport (Ciudad de La Laguna - TFN):</strong> 80 km away (~60–75 minutes drive). Direct via TF-1 or TITSA express line 343.</li>
+          </ul>
+
+          {/* Tips */}
+          <h2 id="tips">Transit Advice</h2>
+          <ul>
+            <li><strong>Arrive by 9:45 AM</strong> if parking in the on-site lot to secure spaces close to the ticket booths.</li>
+            <li>If taking the free shuttle back in the afternoon, board by 5:15 PM in winter or 6:15 PM in summer before the final departure rush.</li>
           </ul>
         </article>
 
@@ -132,7 +173,7 @@ export default function HowToReachPage() {
         </aside>
       </Container>
 
-      <section className="bg-cream-100 py-14 sm:py-20">
+      <section className="border-t border-guide-200 bg-guide-50/50 py-12 sm:py-16">
         <Container>
           <InternalLinkGrid exclude={PATH} />
         </Container>
