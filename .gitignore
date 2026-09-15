@@ -17,7 +17,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# local env files
+# local env files (contains DATABASE_URL / admin credentials — never commit)
+.env
 .env*.local
 
 # typescript

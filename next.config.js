@@ -1,9 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // 100% static site — no admin panel, no CMS, no database, no server-side
-  // routes. `next build` emits plain HTML/CSS/JS into /out, deployable to
-  // any static host (Vercel, Netlify, S3, Cloudflare Pages, GitHub Pages).
-  output: "export",
+  // No longer a static export. Every page's content now lives in Postgres
+  // and is edited from /admin, so the site needs a live Node server to
+  // render fresh data and run the admin API routes — `output: "export"`
+  // (which produced a build-time-only /out folder) is incompatible with
+  // that and has been removed. Deploy to Vercel or any Node-capable host
+  // instead of a static host. See README.md.
   reactStrictMode: true,
   trailingSlash: true,
   images: {

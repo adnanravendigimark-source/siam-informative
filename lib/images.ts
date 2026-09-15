@@ -1,18 +1,51 @@
-// Central, verified image manifest. Every entry was individually sourced
-// from Unsplash, confirmed "Free to use under the Unsplash License", and
-// captioned to honestly describe what the photo actually shows — most of
-// these are stock photos of OTHER water parks, beaches, and landmarks used
-// for atmosphere, not photos of Siam Park itself (this is an unofficial,
-// independent guide with no affiliation to the park). Real, verified
-// locations (Tenerife, Bangkok) are named only where the source photo's
-// own metadata confirms them.
+import { sql, getSiteContentRow, dbErrorMessage } from "./db";
+
+// Central, admin-editable image manifest. The set of KEYS is fixed (code
+// references IMAGES.homeHero, IMAGES.thaiTemple, etc. throughout the
+// site), but the src/alt/credit for each entry can be changed from
+// /admin/images — swapping in a different photo does not require a code
+// change or redeploy.
 export interface SiteImage {
   src: string;
   alt: string;
   credit: string;
 }
 
-export const IMAGES = {
+export type ImageKey =
+  | "homeHero"
+  | "insideAttractions"
+  | "lazyRiver"
+  | "kidsWaterPark"
+  | "thaiTemple"
+  | "tenerifePalm"
+  | "tropicalBeach"
+  | "coastalRoad";
+
+export type ImagesContent = Record<ImageKey, SiteImage>;
+
+export const IMAGE_KEYS: ImageKey[] = [
+  "homeHero",
+  "insideAttractions",
+  "lazyRiver",
+  "kidsWaterPark",
+  "thaiTemple",
+  "tenerifePalm",
+  "tropicalBeach",
+  "coastalRoad",
+];
+
+export const IMAGE_LABELS: Record<ImageKey, string> = {
+  homeHero: "Homepage Hero",
+  insideAttractions: "Rides & Attractions Page Hero",
+  lazyRiver: "Lazy River (Mai Thai River)",
+  kidsWaterPark: "Kids Water Park / Traveler Info Hero",
+  thaiTemple: "Thai Temple / About & Facts Hero",
+  tenerifePalm: "Tenerife Palm Tree",
+  tropicalBeach: "Tropical Beach (Contact / Things to Do Hero)",
+  coastalRoad: "Coastal Road (How to Reach Hero)",
+};
+
+export const DEFAULT_IMAGES: ImagesContent = {
   homeHero: {
     src: "https://images.unsplash.com/photo-1739295194212-0602c4d1e797",
     alt: "Water slides and a swimming pool at a tropical outdoor water park",
@@ -53,4 +86,32 @@ export const IMAGES = {
     alt: "Cars driving along a scenic coastal highway",
     credit: "Fabio Sasso",
   },
-} satisfies Record<string, SiteImage>;
+};
+
+export async function getImages(): Promise<ImagesContent> {
+  const row = await getSiteContentRow();
+  const data = row?.images_json;
+  if (!data || typeof data !== "object") return DEFAULT_IMAGES;
+  const merged = { ...DEFAULT_IMAGES } as ImagesContent;
+  for (const key of IMAGE_KEYS) {
+    if (data[key] && typeof data[key] === "object") {
+      merged[key] = { ...DEFAULT_IMAGES[key], ...data[key] };
+    }
+  }
+  return merged;
+}
+
+export async function saveImages(data: ImagesContent): Promise<void> {
+  try {
+    await sql`
+      INSERT INTO site_content (id, images_json, updated_at)
+      VALUES (1, ${JSON.stringify(data)}::jsonb, now())
+      ON CONFLICT (id) DO UPDATE SET images_json = EXCLUDED.images_json, updated_at = now()
+    `;
+  } catch (err) {
+    throw new Error(dbErrorMessage(err));
+  }
+}
+
+// Back-compat plain constant (built-in defaults only, not admin edits).
+export const IMAGES = DEFAULT_IMAGES;

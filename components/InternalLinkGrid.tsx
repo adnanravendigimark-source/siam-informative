@@ -1,88 +1,57 @@
 import Link from "next/link";
+import { getSiteChrome } from "@/lib/siteChrome";
 
-export interface LinkCard {
-  href: string;
-  title: string;
-  description: string;
-  icon: string;
-}
-
-export const ALL_GUIDE_LINKS: LinkCard[] = [
-  {
-    href: "/inside-siam-park/",
-    title: "Inside the Park",
-    description: "Slides, pools, kids' zones, and on-site facilities once you're inside.",
-    icon: "🌊",
-  },
-  {
-    href: "/how-to-reach-siam-park/",
-    title: "Getting There & Transport",
-    description: "Driving directions, TITSA public bus routes, taxi fares, and parking.",
-    icon: "🧭",
-  },
-  {
-    href: "/traveler-information/",
-    title: "Traveler Practicalities",
-    description: "Hours, ticket overview, locker rentals, packing checklist, and tips.",
-    icon: "🎒",
-  },
-  {
-    href: "/about-siam-park/",
-    title: "About the Park & Design",
-    description: "The history of the park, Thai architectural heritage, and hillside construction.",
-    icon: "🏛️",
-  },
-  {
-    href: "/interesting-facts-about-siam-park/",
-    title: "Facts & Claims Review",
-    description: "Record-setting attractions, sustainability features, and marketing fact-checks.",
-    icon: "📌",
-  },
-  {
-    href: "/things-to-do-near-siam-park/",
-    title: "Things to Do Nearby",
-    description: "Costa Adeje beaches, Siam Mall shopping, and surrounding attractions.",
-    icon: "🗺️",
-  },
-];
-
-export default function InternalLinkGrid({
+export default async function InternalLinkGrid({
   exclude,
-  heading = "Explore More of This Guide",
+  heading,
 }: {
   exclude?: string;
   heading?: string;
 }) {
-  const links = ALL_GUIDE_LINKS.filter((l) => l.href !== exclude);
+  const { guideLinks } = await getSiteChrome();
+  const links = guideLinks.links.filter((l) => l.href !== exclude);
+  const resolvedHeading = heading ?? guideLinks.heading;
+
   return (
     <div>
-      {heading && (
-        <div className="mb-6">
-          <h2 className="text-xl font-bold tracking-tight text-navy sm:text-2xl">{heading}</h2>
-          <p className="mt-1 text-sm text-guide-500">Comprehensive information chapters to help plan your visit.</p>
+      {resolvedHeading && (
+        <div className="mb-8">
+          <h2 className="font-display text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">{resolvedHeading}</h2>
+          <p className="mt-1.5 text-sm text-guide-600">{guideLinks.subheading}</p>
         </div>
       )}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {links.map((link) => (
           <Link
             key={link.href}
             href={link.href}
-            className="group flex flex-col justify-between rounded-lg border border-guide-200 bg-white p-5 shadow-card transition-all hover:border-ocean/60 hover:shadow-lift"
+            className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-guide-200/90 bg-white p-6 shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:border-ocean-cyan/60 hover:shadow-card-hover"
           >
+            {/* Top subtle highlight */}
+            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-ocean-cyan to-navy opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
             <div>
-              <div className="flex items-center gap-3">
-                <span className="text-xl" aria-hidden="true">{link.icon}</span>
-                <h3 className="text-base font-bold text-navy group-hover:text-ocean-dark transition-colors">
-                  {link.title}
-                </h3>
+              <div className="flex items-center justify-between gap-2">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-lagoon-50 to-guide-100 text-xl shadow-xs transition-transform duration-300 group-hover:scale-110" aria-hidden="true">
+                  {link.icon}
+                </span>
+                <span className="rounded-full bg-guide-100 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-guide-600">
+                  {link.tag}
+                </span>
               </div>
-              <p className="mt-2.5 text-xs leading-relaxed text-guide-600">
+
+              <h3 className="mt-4 font-display text-base font-bold text-navy group-hover:text-ocean-dark transition-colors sm:text-lg">
+                {link.title}
+              </h3>
+
+              <p className="mt-2 text-xs leading-relaxed text-guide-600 sm:text-[13px]">
                 {link.description}
               </p>
             </div>
-            <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-ocean-dark">
-              <span>Read guide chapter</span>
-              <span className="transition-transform group-hover:translate-x-0.5" aria-hidden="true">→</span>
+
+            <div className="mt-5 flex items-center gap-1.5 border-t border-guide-100 pt-3.5 text-xs font-bold text-ocean-dark group-hover:text-ocean transition-colors">
+              <span>{guideLinks.ctaLabel}</span>
+              <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
             </div>
           </Link>
         ))}

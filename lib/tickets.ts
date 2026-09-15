@@ -1,3 +1,5 @@
+import { sql, getSiteContentRow, dbErrorMessage } from "./db";
+
 export interface TicketType {
   id: string;
   name: string;
@@ -6,12 +8,27 @@ export interface TicketType {
   summary: string;
   includes: string[];
   bestFor: string;
+  badge?: string;
+  featured?: boolean;
 }
 
-export const TICKET_TYPES: TicketType[] = [
+export interface TicketPolicyNote {
+  icon: string;
+  label: string;
+  body: string;
+}
+
+export interface HoursRow {
+  label: string;
+  hours: string;
+  season: string;
+}
+
+export const DEFAULT_TICKET_TYPES: TicketType[] = [
   {
     id: "general",
     name: "General Admission (1 Day)",
+    badge: "Essential",
     priceAdult: "€42.00 – €45.00",
     priceChild: "€30.00 – €32.00 (Age 3–11)",
     summary: "Standard full-day entry covering every water slide, wave pool, lazy river, and kids play zone in the park.",
@@ -27,6 +44,8 @@ export const TICKET_TYPES: TicketType[] = [
   {
     id: "twin",
     name: "Twin Ticket (Siam Park + Loro Parque)",
+    badge: "Best Value",
+    featured: true,
     priceAdult: "€74.00 – €76.00",
     priceChild: "€53.00 – €55.00 (Age 3–11)",
     summary: "Combined pass granting 1 day at Siam Park (Costa Adeje) and 1 day at Loro Parque (Puerto de la Cruz). Valid for 15 days from first use.",
@@ -41,20 +60,18 @@ export const TICKET_TYPES: TicketType[] = [
   {
     id: "premium",
     name: "Premium Ticket",
+    badge: "Popular",
     priceAdult: "€65.00 – €70.00",
     priceChild: "€48.00 – €52.00",
     summary: "Upgrades general admission with a dining voucher at the Beach Club buffet restaurant, towel hire, and locker rental.",
-    includes: [
-      "Standard park admission",
-      "Lunch voucher (€15 credit for adult / €9 for child)",
-      "Locker rental included",
-      "Towel hire included",
-    ],
+    includes: ["Standard park admission", "Lunch voucher (€15 credit for adult / €9 for child)", "Locker rental included", "Towel hire included"],
     bestFor: "Visitors wanting a hassle-free all-in-one package without carrying extra cash for lunch and locker.",
   },
   {
     id: "all-inclusive",
     name: "All-Inclusive Deluxe Ticket",
+    badge: "VIP Experience",
+    featured: true,
     priceAdult: "€154.00 – €160.00",
     priceChild: "€105.00 – €110.00",
     summary: "The ultimate VIP day pass including unlimited food & drinks all day, locker, towel, and a Fast Pass wristband for major rides.",
@@ -125,16 +142,65 @@ export const TICKET_TYPES: TicketType[] = [
   },
 ];
 
-export interface HoursRow {
-  label: string;
-  hours: string;
-  season: string;
-}
-
-export const SEASONAL_HOURS: HoursRow[] = [
+export const DEFAULT_SEASONAL_HOURS: HoursRow[] = [
   { label: "Summer Season (May 1 – Oct 31)", hours: "10:00 AM – 6:00 PM", season: "Peak summer hours with daily wave pool and full restaurant services." },
   { label: "Winter Season (Nov 1 – Apr 30)", hours: "10:00 AM – 5:00 PM", season: "Winter schedule. All water is heated to 24–25°C throughout the park." },
 ];
 
-export const HOLIDAY_NOTE =
+export const DEFAULT_HOLIDAY_NOTE =
   "Siam Park is open 365 days a year (including weekends and public holidays), but is widely reported to close on Christmas Day (Dec 25). Special night sessions (Siam Night) run on selected July and August weekends from 8:00 PM to 12:00 midnight.";
+
+export const DEFAULT_TICKET_POLICY_NOTES: TicketPolicyNote[] = [
+  { icon: "✓", label: "Infants (0–2)", body: "100% Free Entry (no ticket needed)." },
+  { icon: "★", label: "Canary Residents", body: "~50% local discount with valid NIE & empadronamiento." },
+];
+
+export async function getTicketTypes(): Promise<TicketType[]> {
+  const row = await getSiteContentRow();
+  const data = row?.tickets_json;
+  return Array.isArray(data) && data.length ? data : DEFAULT_TICKET_TYPES;
+}
+
+export async function getSeasonalHours(): Promise<HoursRow[]> {
+  const row = await getSiteContentRow();
+  const data = row?.seasonal_hours_json;
+  return Array.isArray(data) && data.length ? data : DEFAULT_SEASONAL_HOURS;
+}
+
+export async function getHolidayNote(): Promise<string> {
+  const row = await getSiteContentRow();
+  return typeof row?.holiday_note === "string" && row.holiday_note.trim() ? row.holiday_note : DEFAULT_HOLIDAY_NOTE;
+}
+
+export async function getTicketPolicyNotes(): Promise<TicketPolicyNote[]> {
+  const row = await getSiteContentRow();
+  const data = row?.ticket_policy_notes_json;
+  return Array.isArray(data) && data.length ? data : DEFAULT_TICKET_POLICY_NOTES;
+}
+
+export async function saveTicketsPage(data: {
+  ticketTypes: TicketType[];
+  seasonalHours: HoursRow[];
+  holidayNote: string;
+  policyNotes: TicketPolicyNote[];
+}): Promise<void> {
+  try {
+    await sql`
+      INSERT INTO site_content (id, tickets_json, seasonal_hours_json, holiday_note, ticket_policy_notes_json, updated_at)
+      VALUES (1, ${JSON.stringify(data.ticketTypes)}::jsonb, ${JSON.stringify(data.seasonalHours)}::jsonb, ${data.holidayNote}, ${JSON.stringify(data.policyNotes)}::jsonb, now())
+      ON CONFLICT (id) DO UPDATE SET
+        tickets_json = EXCLUDED.tickets_json,
+        seasonal_hours_json = EXCLUDED.seasonal_hours_json,
+        holiday_note = EXCLUDED.holiday_note,
+        ticket_policy_notes_json = EXCLUDED.ticket_policy_notes_json,
+        updated_at = now()
+    `;
+  } catch (err) {
+    throw new Error(dbErrorMessage(err));
+  }
+}
+
+// Back-compat plain constants (built-in defaults only, not admin edits).
+export const TICKET_TYPES = DEFAULT_TICKET_TYPES;
+export const SEASONAL_HOURS = DEFAULT_SEASONAL_HOURS;
+export const HOLIDAY_NOTE = DEFAULT_HOLIDAY_NOTE;
