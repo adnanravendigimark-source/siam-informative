@@ -22,8 +22,8 @@ import { getHomepage } from "@/lib/pages";
 export async function generateMetadata(): Promise<Metadata> {
   const [settings, homepage] = await Promise.all([getSiteSettings(), getHomepage()]);
   return buildMetadata({
-    title: `${settings.siteName} ${homepage.metaTitleSuffix}`,
-    description: settings.siteDescription,
+    title: homepage.metaTitle || `${settings.siteName} ${homepage.metaTitleSuffix}`,
+    description: homepage.metaDescription || settings.siteDescription,
     path: "/",
   });
 }
