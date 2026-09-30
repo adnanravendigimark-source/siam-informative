@@ -92,13 +92,10 @@ export interface HomepageContent {
   faqSection: { heading: string; subheading: string; eyebrow: string };
   independentNotice: { heading: string; body: string; linkLabel: string };
   guideLinksHeading: string; // overrides the default Explore-More heading on the homepage only
-  metaTitleSuffix: string;
-  // Full SEO title/description overrides for the homepage. When blank,
-  // generateMetadata() falls back to the existing `${siteName} ${metaTitleSuffix}`
-  // title and the global Site Settings description, so leaving these empty
-  // changes nothing. Every other page (About, Contact, Facts, Rides, etc.)
-  // already has its own metaTitle/metaDescription — the homepage was the
-  // one page missing this control.
+  // Full SEO title/description for the homepage. When blank, generateMetadata()
+  // falls back to Site Name and the global Site Settings description. Every
+  // other page (About, Contact, Facts, Rides, etc.) already has its own
+  // metaTitle/metaDescription — the homepage was the one page missing this.
   metaTitle: string;
   metaDescription: string;
 }
@@ -212,8 +209,10 @@ export const DEFAULT_HOMEPAGE: HomepageContent = {
     linkLabel: "Visit Official Siam Park Site (siampark.net)",
   },
   guideLinksHeading: "Guide Chapters & Detailed Articles",
-  metaTitleSuffix: "— Full Travel Guide: Rides, Tickets, Hours & Shuttles",
-  metaTitle: "",
+  // Preserves the exact title tag the homepage already had (Site Name +
+  // the old suffix) so removing the separate suffix field doesn't silently
+  // change the live SEO title — it's just now one fully-editable field.
+  metaTitle: "Siam Park Visitor Guide — Full Travel Guide: Rides, Tickets, Hours & Shuttles",
   metaDescription: "",
 };
 

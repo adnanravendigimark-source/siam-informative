@@ -332,15 +332,12 @@ export default function HomepageForm({ initial }: { initial: HomepageContent }) 
         </Field>
       </SectionCard>
 
-      <SectionCard title="SEO" description="Full title tag and meta description for the homepage. Leave either blank to fall back to Site Name + Title suffix, and the global description from Site Settings.">
-        <Field label="Meta title" hint="Full <title> tag override. Leave blank to use Site Name + Title suffix below.">
+      <SectionCard title="SEO" description="Title tag and meta description for the homepage.">
+        <Field label="Meta title" hint="Full <title> tag for the homepage. Leave blank to use Site Name from Site Settings.">
           <input value={data.metaTitle} onChange={(e) => setData((d) => ({ ...d, metaTitle: e.target.value }))} className={inputClass} />
         </Field>
         <Field label="Meta description" hint="Leave blank to use the site-wide description from Site Settings.">
           <textarea rows={3} value={data.metaDescription} onChange={(e) => setData((d) => ({ ...d, metaDescription: e.target.value }))} className={inputClass} />
-        </Field>
-        <Field label="Title suffix" hint="Used only when Meta title above is blank: title tag becomes Site Name + this suffix.">
-          <input value={data.metaTitleSuffix} onChange={(e) => setData((d) => ({ ...d, metaTitleSuffix: e.target.value }))} className={inputClass} />
         </Field>
       </SectionCard>
 
