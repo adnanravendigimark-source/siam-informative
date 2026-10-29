@@ -13,9 +13,7 @@ const connectionUrl =
   process.env.DATABASE_URL?.trim() ||
   "postgresql://postgres:postgres@localhost:5432/postgres";
 
-const neonClient = neon(connectionUrl, {
-  fetchOptions: { cache: "no-store" },
-});
+const neonClient = neon(connectionUrl);
 
 export const sql = ((strings: any, ...values: any[]) => {
   if (!process.env.DATABASE_URL) {

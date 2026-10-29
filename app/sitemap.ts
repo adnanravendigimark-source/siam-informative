@@ -17,6 +17,9 @@ const ROUTES: { path: string; changeFrequency: MetadataRoute.Sitemap[number]["ch
   { path: "/privacy-policy/", changeFrequency: "yearly", priority: 0.2 },
 ];
 
+// Rebuilt daily at most, and immediately after any admin save.
+export const revalidate = 86400;
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   return ROUTES.map((route) => ({

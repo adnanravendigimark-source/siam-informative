@@ -1,3 +1,4 @@
+import { withSiteRevalidate } from "@/lib/revalidateSite";
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import {
@@ -24,7 +25,7 @@ export async function GET() {
   return NextResponse.json({ ticketTypes, seasonalHours, holidayNote, policyNotes });
 }
 
-export async function PUT(req: Request) {
+async function PUTHandler(req: Request) {
   try {
     const body = (await req.json().catch(() => null)) as {
       ticketTypes: TicketType[];
@@ -42,3 +43,5 @@ export async function PUT(req: Request) {
     return NextResponse.json({ error: dbErrorMessage(err) }, { status: 500 });
   }
 }
+
+export const PUT = withSiteRevalidate(PUTHandler);

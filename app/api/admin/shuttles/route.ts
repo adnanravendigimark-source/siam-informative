@@ -1,3 +1,4 @@
+import { withSiteRevalidate } from "@/lib/revalidateSite";
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { getShuttleStops, getBusRoutes, getParkingInfo, saveShuttlesPage, type ShuttleStop, type BusRoute, type ParkingInfo } from "@/lib/shuttles";
@@ -10,7 +11,7 @@ export async function GET() {
   return NextResponse.json({ shuttleStops, busRoutes, parking });
 }
 
-export async function PUT(req: Request) {
+async function PUTHandler(req: Request) {
   try {
     const body = (await req.json().catch(() => null)) as { shuttleStops: ShuttleStop[]; busRoutes: BusRoute[]; parking: ParkingInfo } | null;
     if (!body || !Array.isArray(body.shuttleStops) || !Array.isArray(body.busRoutes) || !body.parking) {
@@ -24,3 +25,5 @@ export async function PUT(req: Request) {
     return NextResponse.json({ error: dbErrorMessage(err) }, { status: 500 });
   }
 }
+
+export const PUT = withSiteRevalidate(PUTHandler);

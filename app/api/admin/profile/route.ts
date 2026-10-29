@@ -1,3 +1,4 @@
+import { withSiteRevalidate } from "@/lib/revalidateSite";
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/session";
 import { verifyOwnerPassword, setAdminPasswordHash } from "@/lib/adminPassword";
@@ -9,7 +10,7 @@ export const dynamic = "force-dynamic";
 // Requires the current password for verification. Works whether the
 // currently-valid password came from ADMIN_PASSWORD (env) or a previously
 // saved DB hash.
-export async function PUT(req: Request) {
+async function PUTHandler(req: Request) {
   const session = await getSession();
   if (!session) {
     return NextResponse.json({ error: "Not authenticated." }, { status: 401 });
@@ -44,3 +45,5 @@ export async function PUT(req: Request) {
     return NextResponse.json({ error: message }, { status: isDbError ? 500 : 400 });
   }
 }
+
+export const PUT = withSiteRevalidate(PUTHandler);

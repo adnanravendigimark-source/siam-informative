@@ -1,3 +1,4 @@
+import { withSiteRevalidate } from "@/lib/revalidateSite";
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { getSiteChrome, saveSiteChrome, type SiteChromeContent } from "@/lib/siteChrome";
@@ -9,7 +10,7 @@ export async function GET() {
   return NextResponse.json(await getSiteChrome());
 }
 
-export async function PUT(req: Request) {
+async function PUTHandler(req: Request) {
   try {
     const body = (await req.json().catch(() => null)) as SiteChromeContent | null;
     if (!body?.header || !body?.footer || !body?.guideLinks || !Array.isArray(body.guideLinks.links)) {
@@ -24,3 +25,5 @@ export async function PUT(req: Request) {
     return NextResponse.json({ error: dbErrorMessage(err) }, { status: 500 });
   }
 }
+
+export const PUT = withSiteRevalidate(PUTHandler);
